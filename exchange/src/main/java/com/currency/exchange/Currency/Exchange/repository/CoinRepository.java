@@ -1,6 +1,6 @@
-package com.currency.exchange.Currency.Exchange.Repository;
+package com.currency.exchange.Currency.Exchange.repository;
 
-import com.currency.exchange.Currency.Exchange.Domain.Model.Coin;
+import com.currency.exchange.Currency.Exchange.model.Coin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.currency.exchange.Currency.Exchange.Exception;
+package com.currency.exchange.Currency.Exchange.exception;
 
 
 
