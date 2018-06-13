@@ -23,22 +23,22 @@ public class CoinHistory implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @NotBlank
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private Coin coin;
 
     @NotNull
     private BigDecimal value;
 
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private LocalDate createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
-    private LocalDate updatedAt;
+//    @Column(nullable = false, updatable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @CreatedDate
+//    private LocalDate createdAt;
+//
+//    @Column(nullable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @LastModifiedDate
+//    private LocalDate updatedAt;
 
 
 }

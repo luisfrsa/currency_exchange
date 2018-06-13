@@ -4,26 +4,16 @@ package com.currency.exchange.Currency.Exchange.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class ApplicationServiceException extends RuntimeException{
-
-    private final HttpStatus status;
-
+public class ApplicationServiceException extends ApplicationException{
     public ApplicationServiceException(String message, HttpStatus status) {
-        super(message);
-        this.status = status;
+        super(message, status);
     }
 
     public ApplicationServiceException(String message, Throwable cause, HttpStatus status) {
-        super(message, cause);
-        this.status = status;
+        super(message, cause, status);
     }
 
     public ApplicationServiceException(Throwable cause, HttpStatus status) {
-        super(cause);
-        this.status = status;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
+        super(cause, status);
     }
 }
