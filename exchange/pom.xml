@@ -172,7 +172,7 @@
                     </resources>
                 </configuration>
             </plugin>
-          <!--jar dependency-->
+            <!--jar dependency-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -207,9 +207,6 @@
                 </executions>
             </plugin>
             <!--jar dependency-->
-
         </plugins>
     </build>
-
-
 </project>

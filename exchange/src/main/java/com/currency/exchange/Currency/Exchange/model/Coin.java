@@ -16,7 +16,7 @@ import java.util.Set;
 
 
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},allowGetters = true)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"})
 @Entity(name="coin")
 @Table(name = "coin")
 public class Coin implements Serializable {

@@ -1,4 +1,5 @@
 FROM anapsix/alpine-java
+
 ARG PORT
 ARG FOLDER
 
