@@ -2,7 +2,7 @@ spring:
   application:
     name: exchange
   datasource:
-    url: jdbc:mysql://localhost:3306/exchange?useSSL=false
+    #url: jdbc:mysql://localhost:3306/exchange?useSSL=false
     username: root
     password: 123
   jpa:

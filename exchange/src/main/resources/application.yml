@@ -2,15 +2,24 @@ spring:
   application:
     name: exchange
   datasource:
-    url: jdbc:mysql://localhost:3306/exchange?useSSL=false
-    username: root
-    password: 123
+    #jdbc: mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:exchange}?useSSL=false
+    url: jdbc:mysql://${DATABASE_HOST:localhost}:${DATABASE_PORT:3306}/${DATABASE_NAME:exchange}?useSSL=false
+    #url: jdbc:mysql://localhost:3306/exchange?useSSL=false
+    username: ${DATABASE_USER:root}
+    password: ${DATABASE_PASSWORD:123}
+    #driver-class-name: com.mysql.jdbc.Driver <- teste se der ok
+    #type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+      initializationfailtimeout: 10000
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+server:
+  port: ${SERVER_PORT:8100}
 eureka:
   client:
     service-url:

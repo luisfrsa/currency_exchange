@@ -1,10 +1,12 @@
 version: '3.1'
 services:
-  db:
-   #image: mariadb:latest
+  mydb:
     build: 
       context: ./database
       dockerfile: mysql.Dockerfile  
+    volumes:
+       - db_data:/var/lib/mysql  
+    restart: always
     ports:
       - "3306:3306"
     environment:
@@ -21,50 +23,45 @@ services:
     build: 
       context: .
       args: 
-        PORT: 8000
         FOLDER: exchange
     depends_on:
-      - "eureka"
+      - eureka
+      - mydb
     ports:
       - "8000:8000"
     networks:
       - containernetwork
-  exchange2:
-    build: 
-      context: .
-      args: 
-        PORT: 8001
-        FOLDER: exchange
-    depends_on:
-      - "eureka"
-    ports:
-      - "8001:8001" 
-    networks:
-      - containernetwork      
+    environment:
+      SERVER_PORT: 8000
+      DATABASE_HOST: localhost
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 123
+      DATABASE_NAME: exchange
+      DATABASE_PORT: 3306  
+    # deploy:
+    #   mode: replicated
+    #   replicas: 6   
   transaction1:
     build: 
       context: .
       args: 
-        PORT: 8100
         FOLDER: transaction
     depends_on:
-      - "eureka"
+      - eureka
+      - mydb      
     ports:
       - "8100:8100" 
     networks:
       - containernetwork  
-  transaction2:
-    build: 
-      context: .
-      args: 
-        PORT: 8101
-        FOLDER: transaction
-    depends_on:
-      - "eureka"
-    ports:
-      - "8101:8101"             
-    networks:
-      - containernetwork 
+    environment:
+      SERVER_PORT: 8100
+      DATABASE_HOST: localhost
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 123
+      DATABASE_NAME: transaction
+      DATABASE_PORT: 3306 
 networks:
   containernetwork:
     driver: bridge
+volumes:
+    db_data:    

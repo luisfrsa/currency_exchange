@@ -4,9 +4,14 @@ spring:
   application:
     name: transaction
   datasource:
-    url: jdbc:mysql://localhost:3306/transaction?useSSL=false
-    username: root
-    password: 123
+    jdbc: mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    #driver-class-name: com.mysql.jdbc.Driver <- teste se der ok
+    testWhileIdle: true
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    timeBetweenEvictionRunsMillis: 10000
   jpa:
     properties:
       hibernate:
@@ -14,7 +19,7 @@ spring:
     hibernate:
       ddl-auto: update
 server:
-  port: 8002
+  port: ${SERVER_PORT}
 eureka:
   client:
     service-url:

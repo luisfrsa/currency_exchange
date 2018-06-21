@@ -8,7 +8,7 @@ do
     cp -r ./../$folder/target ./$dockerfolder/targets/target_$folder
 done
 
-docker-compose -f ./$dockerfolder/docker-compose.yml up
+docker-compose -f ./$dockerfolder/docker-compose.yml up --build -d
 
 #docker-compose up --build -d
 # mvn spring-boot:run -Dspring-boot.run.profiles=8001
