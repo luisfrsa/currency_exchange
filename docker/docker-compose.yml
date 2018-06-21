@@ -11,60 +11,60 @@ services:
       MYSQL_ROOT_PASSWORD: 123  
     networks:
       - containernetwork  
-#  eureka:
-#    image: springcloud/eureka
-#    ports:
-#      - "8761:8761"
-#    networks:
-#      - containernetwork
-#  exchange1:
-#    build:
-#      context: .
-#      args:
-#        PORT: 8000
-#        FOLDER: exchange
-#    depends_on:
-#      - "eureka"
-#    ports:
-#      - "8000:8000"
-#    networks:
-#      - containernetwork
-#  exchange2:
-#    build:
-#      context: .
-#      args:
-#        PORT: 8001
-#        FOLDER: exchange
-#    depends_on:
-#      - "eureka"
-#    ports:
-#      - "8001:8001"
-#    networks:
-#      - containernetwork
-#  transaction1:
-#    build:
-#      context: .
-#      args:
-#        PORT: 8100
-#        FOLDER: transaction
-#    depends_on:
-#      - "eureka"
-#    ports:
-#      - "8100:8100"
-#    networks:
-#      - containernetwork
-#  transaction2:
-#    build:
-#      context: .
-#      args:
-#        PORT: 8101
-#        FOLDER: transaction
-#    depends_on:
-#      - "eureka"
-#    ports:
-#      - "8101:8101"
-#    networks:
-#      - containernetwork 
+  eureka:
+    image: springcloud/eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - containernetwork 
+  exchange1:
+    build: 
+      context: .
+      args: 
+        PORT: 8000
+        FOLDER: exchange
+    depends_on:
+      - "eureka"
+    ports:
+      - "8000:8000"
+    networks:
+      - containernetwork
+  exchange2:
+    build: 
+      context: .
+      args: 
+        PORT: 8001
+        FOLDER: exchange
+    depends_on:
+      - "eureka"
+    ports:
+      - "8001:8001" 
+    networks:
+      - containernetwork      
+  transaction1:
+    build: 
+      context: .
+      args: 
+        PORT: 8100
+        FOLDER: transaction
+    depends_on:
+      - "eureka"
+    ports:
+      - "8100:8100" 
+    networks:
+      - containernetwork  
+  transaction2:
+    build: 
+      context: .
+      args: 
+        PORT: 8101
+        FOLDER: transaction
+    depends_on:
+      - "eureka"
+    ports:
+      - "8101:8101"             
+    networks:
+      - containernetwork 
 networks:
   containernetwork:
     driver: bridge

@@ -48,7 +48,6 @@ public class novoService {
 
         UserVO user = responseEntity.getBody();
         return user;
-//        return new CoinDTO(response.getId(), from, to, response.getPort());
     }
 
 
@@ -57,9 +56,6 @@ public class novoService {
 
         UserVO response = proxy.getWhatEver(id);
         return response;
-//        return null;
-
-//        return new CoinDTO(response.getId(), from, to, response.getPort());
     }
 
     @GetMapping("/findone")
