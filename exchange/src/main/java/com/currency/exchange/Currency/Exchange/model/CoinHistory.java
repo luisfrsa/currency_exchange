@@ -30,15 +30,4 @@ public class CoinHistory implements Serializable {
     @NotNull
     private BigDecimal value;
 
-//    @Column(nullable = false, updatable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @CreatedDate
-//    private LocalDate createdAt;
-//
-//    @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @LastModifiedDate
-//    private LocalDate updatedAt;
-
-
 }

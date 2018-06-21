@@ -21,6 +21,7 @@ import java.util.Set;
 @Table(name = "coin")
 public class Coin implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -45,10 +46,6 @@ public class Coin implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Long getId() {
         return id;
