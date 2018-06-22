@@ -1,9 +1,11 @@
 version: '3.1'
 services:
   mydb:
-    build: .
+    build: 
+      context: ./database
+      dockerfile: mysql.Dockerfile  
     volumes:
-       - db_data:/var/lib/mysql  
+       - v_db_data:/var/lib/mysql  
     restart: always
     ports:
       - "3306:3306"
@@ -30,7 +32,10 @@ services:
       - postgresql:/var/lib/postgresql      
       - postgresql_data:/var/lib/postgresql/data
   sonarqube:
-    image: sonarqube
+    #image: sonarqube
+    build: 
+      context: .
+      dockerfile: sonar.Dockerfile  
     ports:
       - "9000:9000"
     networks:
@@ -40,20 +45,16 @@ services:
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
-      # - sonarqube_extensions:/opt/sonarqube/extensions
-      # - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins      
 networks:
   containernetwork:
     driver: bridge
   networksonar:
     driver: bridge    
 volumes:
-  db_data:    
+  v_db_data:    
   volumes:
   sonarqube_conf:
   sonarqube_data:
-  # sonarqube_extensions:
-  # sonarqube_bundled-plugins:
   postgresql:
   postgresql_data:
   jenkins-data:

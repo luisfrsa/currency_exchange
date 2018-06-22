@@ -61,6 +61,7 @@ public class CoinService {
         return update(coinDTO);
     }
 
+    @Transactional
     public CoinDTO save(CoinDTO coinDTO) {
         String stringDebug = format(REQUEST_SAVE);
         log.debug(stringDebug);
@@ -68,6 +69,7 @@ public class CoinService {
         return coinMapper.toDto(coinRepository.save(coin));
     }
 
+    @Transactional
     public CoinDTO update(CoinDTO coinDTO) {
         String stringDebug = format(REQUEST_UPDATE, coinDTO.getId());
         log.debug(stringDebug);

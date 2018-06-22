@@ -29,6 +29,26 @@
         <spring-cloud.version>Finchley.M8</spring-cloud.version>
         <maven-jar-plugin.mainClass>com.currency.exchange.Currency.Exchange.CurrencyExchangeApplication
         </maven-jar-plugin.mainClass>
+        <junit.version>4.12</junit.version>
+        <mockito-core.version>2.8.9</mockito-core.version>
+        <powermock.version>1.7.1</powermock.version>
+        <powermock-api-mockito2.version>1.7.1</powermock-api-mockito2.version>
+        <powermock-module-junit4.version>1.7.1</powermock-module-junit4.version>
+        <sonar.language>java</sonar.language>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <!--<sonar.surefire.reportsPath>${project.testresult.directory}/surefire-reports</sonar.surefire.reportsPath>-->
+        <!--<sonar.tests>${project.basedir}/src/test/</sonar.tests>-->
+        <!--<sonar.jacoco.itReportPath>${project.testresult.directory}/coverage/jacoco/jacoco-it.exec</sonar.jacoco.itReportPath>-->
+        <!--<sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>-->
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <sonar-maven-plugin.version>3.2</sonar-maven-plugin.version>
+
+        <sonar.exclusions>
+            src/main/java/com/currency/exchange/Currency/Exchange/model/**/*.java
+            src/main/java/com/currency/exchange/Currency/Exchange/service/dto/**/*.java
+            src/main/java/com/currency/exchange/Currency/Exchange/service/mapper/**/*.java
+            src/test/**/*.*
+        </sonar.exclusions>
     </properties>
 
     <dependencies>
@@ -76,7 +96,54 @@
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
         <!--spring-cloud-->
-
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--tests-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock-module-junit4.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock-api-mockito2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--tests-->
     </dependencies>
 
     <!--spring-cloud-->
@@ -130,7 +197,22 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    <profiles>
+        <!--sonar-->
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.host.url>
+                    http://localhost:9000
+                </sonar.host.url>
+            </properties>
+        </profile>
+        <!--sonar-->
 
+    </profiles>
     <!--spring-cloud-->
 
     <build>
@@ -206,7 +288,46 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--jar dependency-->
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings
+                    only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.jacoco</groupId>
+                                        <artifactId>
+                                            jacoco-maven-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [0.7.2.201409121644,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>prepare-agent</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+                <!--sonar-->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                </plugin>
+                <!--sonar-->
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
