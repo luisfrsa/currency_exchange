@@ -42,7 +42,8 @@
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.surefire.reportsPath>${project.testresult.directory}/surefire-reports</sonar.surefire.reportsPath>
         <sonar.tests>${project.basedir}/src/test/</sonar.tests>
-        <sonar.jacoco.itReportPath>${project.testresult.directory}/coverage/jacoco/jacoco-it.exec</sonar.jacoco.itReportPath>
+        <sonar.jacoco.itReportPath>${project.testresult.directory}/coverage/jacoco/jacoco-it.exec
+        </sonar.jacoco.itReportPath>
         <sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar-maven-plugin.version>3.2</sonar-maven-plugin.version>
@@ -201,6 +202,7 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    <!--spring-cloud-->
     <profiles>
         <!--sonar-->
         <profile>
@@ -265,7 +267,7 @@
         <!--sonar-->
 
     </profiles>
-    <!--spring-cloud-->
+
 
     <build>
         <plugins>
@@ -290,6 +292,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <!--docker-->
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -306,6 +309,7 @@
                     </resources>
                 </configuration>
             </plugin>
+            <!--docker-->
             <!--jar dependency-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -340,45 +344,49 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--jar dependency-->
+            <!--sonar-->
             <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco-maven-plugin.version}</version>
-            <executions>
-                <execution>
-                    <id>pre-unit-tests</id>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                    <configuration>
-                        <!-- Sets the path to the file which contains the execution data. -->
-                        <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
-                    </configuration>
-                </execution>
-                <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run -->
-                <execution>
-                    <id>post-unit-test</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                    <configuration>
-                        <dataFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</dataFile>
-                        <outputDirectory>${project.testresult.directory}/coverage/jacoco</outputDirectory>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>pre-unit-tests</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
+                            <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
+                        </configuration>
+                    </execution>
+                    <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run -->
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</dataFile>
+                            <outputDirectory>${project.testresult.directory}/coverage/jacoco</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar-maven-plugin.version}</version>
             </plugin>
+            <!--sonar-->
+
         </plugins>
+        <!--sonar-->
+
         <pluginManagement>
             <plugins>
-                <!--This plugin's configuration is used to store Eclipse m2e settings
-                    only. It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -407,13 +415,12 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
-                <!--sonar-->
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                 </plugin>
-                <!--sonar-->
             </plugins>
         </pluginManagement>
+        <!--sonar-->
     </build>
 </project>
