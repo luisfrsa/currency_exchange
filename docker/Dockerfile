@@ -1,11 +1,11 @@
-FROM anapsix/alpine-java
+FROM mariadb:latest
 
-ARG PORT
-ARG FOLDER
+# ARG USER
+# ARG PASS
 
-COPY ./targets/target_$FOLDER/*.jar /home/SNAPSHOT.jar
-COPY ./targets/target_$FOLDER/dependency-jars /home/dependency-jars
+# ENV MYSQL_DATABASE=$USER \
+#     MYSQL_ROOT_PASSWORD=$PASS
 
-RUN java -jar /home/SNAPSHOT.jar -Dserver.port=$PORT
+ADD schema.sql /docker-entrypoint-initdb.d
 
-
+EXPOSE 3306
