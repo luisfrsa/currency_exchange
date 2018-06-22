@@ -1,2 +1,0 @@
-mvn clean install -Pdevsonar
-mvn sonar:sonar -Pdevsonar -Dsonar.host.url=http://localhost:9000 
