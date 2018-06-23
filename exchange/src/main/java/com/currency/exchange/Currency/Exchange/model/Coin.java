@@ -17,7 +17,7 @@ import java.util.Set;
 
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"})
-@Entity(name="coin")
+@Entity(name = "coin")
 @Table(name = "coin")
 public class Coin implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class Coin implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "value", precision=10, scale=2, nullable = false)
+    @Column(name = "value", precision = 10, scale = 2, nullable = false)
     private BigDecimal value;
 
     @OneToMany
@@ -46,6 +46,15 @@ public class Coin implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
+    public Coin() {
+
+    }
+
+    public Coin(CoinBuilder builder) {
+        this.name = builder.name;
+        this.value = builder.value;
+        this.coinHistorySet = builder.coinHistorySet;
+    }
 
     public Long getId() {
         return id;
@@ -97,16 +106,18 @@ public class Coin implements Serializable {
 
     public static class CoinBuilder {
 
+        private Long id;
         private final String name;
         private BigDecimal value;
         private Set<CoinHistory> coinHistorySet;
 
 
         public CoinBuilder(String name) {
-            if(Objects.isNull(name)){
+            if (Objects.isNull(name)) {
                 throw new IllegalArgumentException("Coin name can not be null");
             }
             this.name = name;
+
         }
 
         public CoinBuilder setValue(BigDecimal value) {
@@ -117,6 +128,10 @@ public class Coin implements Serializable {
         public CoinBuilder setCoinHistorySet(Set<CoinHistory> coinHistorySet) {
             this.coinHistorySet = coinHistorySet;
             return this;
+        }
+
+        public Coin build() {
+            return new Coin(this);
         }
     }
 

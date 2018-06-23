@@ -8,6 +8,8 @@ public class UserVO {
 
     private Long id;
     private String name;
+    private String login;
+    private String password;
     private BigDecimal money;
     private String port;
     private List<Coin> coins;
@@ -52,8 +54,26 @@ public class UserVO {
         return coins;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public UserVO setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
     public UserVO setCoins(List<Coin> coins) {
         this.coins = coins;
+        return this;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public UserVO setLogin(String login) {
+        this.login = login;
         return this;
     }
 }

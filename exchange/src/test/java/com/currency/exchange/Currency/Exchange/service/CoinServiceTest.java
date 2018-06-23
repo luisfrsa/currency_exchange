@@ -13,7 +13,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -50,6 +53,15 @@ public class CoinServiceTest {
     public void save() {
         CoinDTO savedDTO = service.persist(dto);
         assertEquals(dto.getName(), savedDTO.getName());
+    }
+
+    @Test
+    public void dumb() {
+        Map<String, Coin> m = Arrays.asList(1, 2, 3).stream().map(e ->
+                new Coin.CoinBuilder("name").setValue(BigDecimal.valueOf(e)).build()
+        ).collect(Collectors.toMap(p -> p.getName(), p -> p));
+        assertEquals(1, 1);
+
     }
 
     private Coin createEntityWithoutId() {
